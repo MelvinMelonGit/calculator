@@ -23,6 +23,7 @@ function updateScreen(value) {
         calculatorScreen.textContent = '';
         oldTotal = 0;
         newTotal = 0;
+        updateScreen(oldTotal);
     } else {
         calculatorScreen.textContent = value;
     }
@@ -48,8 +49,7 @@ function operate(operator, num1, num2) {
     return operatorTotal;
 }
 
-function displayOutput(e) { //temporary function, may change later
-
+function displayOutput(e) {
     //happy case
 
     //1. user clicks on a number button
