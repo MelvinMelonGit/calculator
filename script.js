@@ -55,7 +55,7 @@ function displayOutput(e) {
     }
 
     //2. if target is number, display it. if next value is a number, concatenate with previous value
-    if (prevValue === 0 && targetClass.contains('number')) {
+    if (prevValue === 0 && operator === null && targetClass.contains('number')) {
         prevValue = target;
     } else if (prevValue !== 0 && operator === null && targetClass.contains('number')) {
         prevValue += `${target}`;
@@ -69,7 +69,7 @@ function displayOutput(e) {
     //4. operator variable needs to be available before accessing 2nd number
     if (nextValue === 0 && operator !== null && targetClass.contains('number')) {
         nextValue = target;
-    } else if (nextValue !== 0 && targetClass.contains('number')) {
+    } else if (nextValue !== 0 && operator !== null && targetClass.contains('number')) {
         nextValue += `${target}`;
     }
 
