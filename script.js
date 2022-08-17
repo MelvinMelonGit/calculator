@@ -38,6 +38,8 @@ function operate(operator, num1, num2) {
         operatorTotal = divide(num1, num2);
     }
 
+    if (operatorTotal === Infinity) return "Not a number!";
+
     return operatorTotal;
 }
 
@@ -63,6 +65,14 @@ function displayOutput(e) {
 
     //3. if target is operator, save it as a variable
     if (targetClass.contains('operator')) {
+        if (operator === null) operator = target;
+        if (operator === "*" || operator === "/") {
+            prevValue = operate(operator, parseInt(prevValue), 1);
+            console.log(prevValue);
+        } else {
+            prevValue = operate(operator, parseInt(prevValue), parseInt(nextValue));
+        }
+        nextValue = 0;
         operator = target;
     }
 
