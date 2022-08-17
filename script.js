@@ -37,7 +37,7 @@ function operate(operator, num1, num2) {
         operatorTotal = divide(num1, num2);
     }
     //check for zero division error
-    if (operatorTotal === Infinity) operatorTotal =  "Not a number!";
+    if (operatorTotal === Infinity || isNaN(operatorTotal)) operatorTotal =  "Not a number!";
 
     return operatorTotal;
 }
