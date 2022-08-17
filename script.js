@@ -24,7 +24,6 @@ function updateScreen(value) {
 function operate(operator, num1, num2) {
     let operatorTotal = 0;
 
-    console.log(operator, num1, num2);
     if (operator === "+") {
         operatorTotal = add(num1, num2);
     }
@@ -37,8 +36,8 @@ function operate(operator, num1, num2) {
     if (operator === "/") {
         operatorTotal = divide(num1, num2);
     }
-
-    if (operatorTotal === Infinity) return "Not a number!";
+    //check for zero division error
+    if (operatorTotal === Infinity) operatorTotal =  "Not a number!";
 
     return operatorTotal;
 }
@@ -49,7 +48,7 @@ function displayOutput(e) {
     const target = e.target.textContent;
     const targetClass = e.target.classList;
 
-    //1.5 if target is AC zero everything
+    //if target is AC zero everything
     if (target === "AC") {
         prevValue = 0;
         nextValue = 0;
@@ -67,11 +66,10 @@ function displayOutput(e) {
     if (targetClass.contains('operator')) {
         if (operator === null) operator = target;
         if (operator === "*" || operator === "/") {
-            prevValue = operate(operator, parseInt(prevValue), 1);
-            console.log(prevValue);
-        } else {
-            prevValue = operate(operator, parseInt(prevValue), parseInt(nextValue));
+            if (nextValue === 0) return; //disable multiplication or division of zero for first operation
         }
+        //use the previous saved operator for calculation, not the current one
+        prevValue = operate(operator, parseInt(prevValue), parseInt(nextValue));
         nextValue = 0;
         operator = target;
     }
@@ -95,5 +93,4 @@ function displayOutput(e) {
 
 calculatorBottom.addEventListener('click', displayOutput);
 
-//edge cases - like chained operations, decimals, etc...
-//to be added
+//edge cases to be added - like decimals, etc...
